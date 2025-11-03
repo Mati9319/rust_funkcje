@@ -44,7 +44,12 @@ pub fn brutto_na_netto(
 
     let netto = brutto - zus - zdrowotna - podatek;
 
-    let wynik = [zus_emerytalna, zus_rentowa, zus_chorobowa, zdrowotna, podatek, netto];
+    let wynik = [zus_emerytalna,
+                 zus_rentowa,
+                 zus_chorobowa,
+                 zdrowotna,
+                 podatek,
+                 netto];
 
     wynik
 }
