@@ -9,25 +9,25 @@ pub fn brutto_na_netto(
     jaki_pod: char, //'1' <- 12%, '2' <- 32%
     jaka_ulga: char //'0' <- brak ulgi, '1' <- 300, '2' <- 150, '3' <- 100
     
-) {
+) -> [f32; 6] {
     let kup = match jakie_kup {
-        '_' => 0.0,
         '1' => 250.0,
-        '2' => 300.0
+        '2' => 300.0,
+        _ => 0.0
     };
 
     let pod = match jaki_pod {
-        '_' => 0.12,
-        '2' => 0.32
-    }
+        '2' => 0.32,
+        _ => 0.12
+    };
 
     let ulga = match jaka_ulga {
-        '_' => 0.0,
         '1' => 300.0,
         '2' => 150.0,
-        '3' => 100.0
-    }
-    
+        '3' => 100.0,
+        _ => 0.0
+    };
+
     let zus_emerytalna = zaokr(brutto * 0.0976);
     let zus_rentowa = zaokr(brutto * 0.015);
     let zus_chorobowa = zaokr(brutto * 0.0245);
