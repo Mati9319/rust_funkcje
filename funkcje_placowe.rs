@@ -50,33 +50,33 @@ pub fn brutto_na_netto(
                     + brutto_pod
                     + brutto_netto;
 
-    let pod_zus = brutto_zus_zdr_pod //przychód stanowiący podstawę składek ZUS
+    let pd_zus = brutto_zus_zdr_pod //przychód stanowiący podstawę składek ZUS
                 + brutto_nie_zus_zdr_pod;
 
-    let pod_zdr = brutto_zus_zdr_pod //przychód stanowiący podstawę składki zdrowotnej
+    let pd_zdr = brutto_zus_zdr_pod //przychód stanowiący podstawę składki zdrowotnej
                 + brutto_zdr_pod
                 + brutto_nie_zus_zdr_pod
                 + brutto_nie_zdr_pod;
 
-    let pod_pod = brutto_zus_zdr_pod //przychód stanowiący podstawę podatku
+    let pd_pod = brutto_zus_zdr_pod //przychód stanowiący podstawę podatku
                 + brutto_zdr_pod
                 + brutto_pod
                 + brutto_nie_zus_zdr_pod
                 + brutto_nie_zdr_pod
                 + brutto_nie_pod;
 
-    let zus_emerytalna = zaokr(pod_zus * 0.0976);
-    let zus_rentowa = zaokr(pod_zus * 0.015);
-    let zus_chorobowa = zaokr(pod_zus * 0.0245);
+    let zus_emerytalna = zaokr(pd_zus * 0.0976);
+    let zus_rentowa = zaokr(pd_zus * 0.015);
+    let zus_chorobowa = zaokr(pd_zus * 0.0245);
 
     let zus = zus_emerytalna + zus_rentowa + zus_chorobowa; //suma składek ZUS
 
-    let zdrowotna = zaokr((pod_zdr - zus) * 0.09);
+    let zdrowotna = zaokr((pd_zdr - zus) * 0.09);
 
     let podatek = if pod_zwol {
         0.0
     } else {
-        ((pod_pod - zus - kup).round() * pod_proc - ulga).round()
+        ((pd_pod - zus - kup).round() * pod_proc - ulga).round()
     };
 
     let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
