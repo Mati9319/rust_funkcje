@@ -3,7 +3,15 @@ fn zaokr(x: f32) -> f32 {
 }
 
 pub fn brutto_na_netto(
-    brutto: f32,
+    brutto_zus_zdr_pod: f32, //przychód ozusowany, ozdrowotniony i opodatkowany
+    brutto_zdr_pod: f32, //przychód ozdrowotniony i opodatkowany
+    brutto_pod: f32, //przychód opodatkowany
+    brutto_netto: f32, //przychód bez potrąceń
+    brutto_nie_zus_zdr_pod: f32, //przychód niewypłacany (ozusowany, ozdrowotniony i opodatkowany)
+    brutto_nie_zdr_pod: f32, //przychód niewypłacany (ozdrowotniony i opodatkowany)
+    brutto_nie_pod: f32, //przychód niewypłacany (opodatkowany)
+    brutto_nie_netto: f32, //przychód niewypłacany (bez potrąceń)
+    potr: f32, //dodatkowe potrącenia
     pod_zwol: bool, //czy zwolnienie z podatku
     jakie_kup: char, //'0' <- brak kosztów, '1' <- 250, '2' <- 300
     jaki_pod: char, //'1' <- 12%, '2' <- 32%
@@ -27,7 +35,11 @@ pub fn brutto_na_netto(
         '3' => 100.0,
         _ => 0.0
     };
-    
+    let brutto_wyp = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_pod + brutto_netto; //cały wypłacany przychód
+
+    let pod_zus = brutto_zus_zdr_pod + brutto_nie_zus_zdr_pod;
+    let pod_zdr = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_nie_zus_zdr_pod
+
     let zus_emerytalna = zaokr(brutto * 0.0976);
     let zus_rentowa = zaokr(brutto * 0.015);
     let zus_chorobowa = zaokr(brutto * 0.0245);
