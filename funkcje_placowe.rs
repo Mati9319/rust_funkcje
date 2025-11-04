@@ -2,7 +2,7 @@ fn zaokr(x: f32) -> f32 {
     (x * 100.0).round() / 100.0
 }
 
-struct Wynik {
+pub struct Wynik {
     calkowite_wynagrodzenie_brutto: f32,
     wyplacane_wynagrodzenie_brutto: f32,
     skladka_emerytalna: f32,
@@ -97,13 +97,13 @@ pub fn brutto_na_netto(
     let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
 
     Wynik {
-        brutto_cal,
-        brutto_wyp,
-        zus_emerytalna,
-        zus_rentowa,
-        zus_chorobowa,
-        zdrowotna,
-        podatek,
-        netto
+        calkowite_wynagrodzenie_brutto: brutto_cal,
+        wyplacane_wynagrodzenie_brutto: brutto_wyp,
+        skladka_emerytalna: zus_emerytalna,
+        skladka_rentowa: zus_rentowa,
+        skladka_chorobowa: zus_chorobowa,
+        skladka_zdrowotna: zdrowotna,
+        podatek: podatek,
+        wynagrodzenie_netto: netto
     }
 }
