@@ -3,19 +3,19 @@ fn zaokr(x: f32) -> f32 {
 }
 
 pub fn brutto_na_netto(
-    brutto_zus_zdr_pod: f32, //przychód ozusowany, ozdrowotniony i opodatkowany
-    brutto_zdr_pod: f32, //przychód ozdrowotniony i opodatkowany
-    brutto_pod: f32, //przychód opodatkowany
-    brutto_netto: f32, //przychód bez potrąceń
-    brutto_nie_zus_zdr_pod: f32, //przychód niewypłacany (ozusowany, ozdrowotniony i opodatkowany)
-    brutto_nie_zdr_pod: f32, //przychód niewypłacany (ozdrowotniony i opodatkowany)
-    brutto_nie_pod: f32, //przychód niewypłacany (opodatkowany)
-    brutto_nie_netto: f32, //przychód niewypłacany (bez potrąceń)
-    potr_dod: f32, //dodatkowe potrącenia
-    pod_zwol: bool, //czy zwolnienie z podatku
-    jakie_kup: char, //'0' <- brak kosztów, '1' <- 250, '2' <- 300
-    jaki_pod_proc: char, //'1' <- 12%, '2' <- 32%
-    jaka_ulga: char //'0' <- brak ulgi, '1' <- 300, '2' <- 150, '3' <- 100
+    brutto_zus_zdr_pod: f32,        //przychód ozusowany, ozdrowotniony i opodatkowany
+    brutto_zdr_pod: f32,            //przychód ozdrowotniony i opodatkowany
+    brutto_pod: f32,                //przychód opodatkowany
+    brutto_netto: f32,              //przychód bez potrąceń
+    brutto_nie_zus_zdr_pod: f32,    //przychód niewypłacany (ozusowany, ozdrowotniony i opodatkowany)
+    brutto_nie_zdr_pod: f32,        //przychód niewypłacany (ozdrowotniony i opodatkowany)
+    brutto_nie_pod: f32,            //przychód niewypłacany (opodatkowany)
+    brutto_nie_netto: f32,          //przychód niewypłacany (bez potrąceń)
+    potr_dod: f32,                  //dodatkowe potrącenia
+    pod_zwol: bool,                 //czy zwolnienie z podatku
+    jakie_kup: char,                //'0' <- brak kosztów, '1' <- 250, '2' <- 300
+    jaki_pod_proc: char,            //'1' <- 12%, '2' <- 32%
+    jaka_ulga: char                 //'0' <- brak ulgi, '1' <- 300, '2' <- 150, '3' <- 100
 
 ) -> [f32; 8] {
     let kup = match jakie_kup {
@@ -81,14 +81,12 @@ pub fn brutto_na_netto(
 
     let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
 
-    let wynik = [brutto_cal,
-                brutto_wyp,
-                zus_emerytalna,
-                zus_rentowa,
-                zus_chorobowa,
-                zdrowotna,
-                podatek,
-                netto];
-
-    wynik
+    [brutto_cal,
+    brutto_wyp,
+    zus_emerytalna,
+    zus_rentowa,
+    zus_chorobowa,
+    zdrowotna,
+    podatek,
+    netto]
 }
