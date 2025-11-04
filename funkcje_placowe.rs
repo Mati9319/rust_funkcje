@@ -27,7 +27,7 @@ pub fn brutto_na_netto(
         '3' => 100.0,
         _ => 0.0
     };
-
+    
     let zus_emerytalna = zaokr(brutto * 0.0976);
     let zus_rentowa = zaokr(brutto * 0.015);
     let zus_chorobowa = zaokr(brutto * 0.0245);
