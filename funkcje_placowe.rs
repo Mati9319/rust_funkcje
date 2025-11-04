@@ -1,5 +1,7 @@
-fn zaokr(x: f32) -> f32 {
-    (x * 100.0).round() / 100.0
+impl f32 {
+    pub fn round2(&self) -> f32 {
+        (self * 100.0).round() / 100.0
+    }
 }
 
 pub fn brutto_na_netto(
@@ -44,22 +46,22 @@ pub fn brutto_na_netto(
         + brutto_nie_zus_zdr_pod
         + brutto_nie_zdr_pod
         + brutto_nie_pod
-        + brutto_nie_netto);
+        + brutto_nie_netto).round2();
 
     let brutto_wyp =    //cały wypłacany przychód
         zaokr(brutto_zus_zdr_pod
         + brutto_zdr_pod
         + brutto_pod
-        + brutto_netto);
+        + brutto_netto).round2();
 
     let pd_zus =        //przychód stanowiący podstawę składek ZUS
         zaokr(brutto_zus_zdr_pod
-        + brutto_nie_zus_zdr_pod);
+        + brutto_nie_zus_zdr_pod).round2();
 
     let pd_zdr =        //przychód stanowiący podstawę składki zdrowotnej
         zaokr(brutto_zus_zdr_pod
         + brutto_nie_zus_zdr_pod
-        + brutto_nie_zdr_pod);
+        + brutto_nie_zdr_pod).round2();
 
     let pd_pod =        //przychód stanowiący podstawę podatku
         zaokr(brutto_zus_zdr_pod
@@ -67,15 +69,15 @@ pub fn brutto_na_netto(
         + brutto_pod
         + brutto_nie_zus_zdr_pod
         + brutto_nie_zdr_pod
-        + brutto_nie_pod);
+        + brutto_nie_pod).round2();
 
-    let zus_emerytalna = zaokr(pd_zus * 0.0976);
-    let zus_rentowa = zaokr(pd_zus * 0.015);
-    let zus_chorobowa = zaokr(pd_zus * 0.0245);
+    let zus_emerytalna = (pd_zus * 0.0976).round2();
+    let zus_rentowa = (pd_zus * 0.015).round2();
+    let zus_chorobowa = (pd_zus * 0.0245).round2();
 
-    let zus = zaokr(zus_emerytalna + zus_rentowa + zus_chorobowa); //suma składek ZUS
+    let zus = (zus_emerytalna + zus_rentowa + zus_chorobowa).round2(); //suma składek ZUS
 
-    let zdrowotna = zaokr((pd_zdr - zus) * 0.09);
+    let zdrowotna = ((pd_zdr - zus) * 0.09).round2();
 
     let podatek = if pod_zwol {
         0.0
@@ -83,7 +85,7 @@ pub fn brutto_na_netto(
         ((pd_pod - zus - kup).round() * pod_proc - ulga).round()
     };
 
-    let netto = zaokr(brutto_wyp - zus - zdrowotna - podatek - potr_dod);
+    let netto = (brutto_wyp - zus - zdrowotna - podatek - potr_dod).round2();
 
     Wynik {
         brutto_cal,
