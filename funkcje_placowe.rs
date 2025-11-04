@@ -2,17 +2,6 @@ fn zaokr(x: f32) -> f32 {
     (x * 100.0).round() / 100.0
 }
 
-pub struct Wynik {
-    calkowite_wynagrodzenie_brutto: f32,
-    wyplacane_wynagrodzenie_brutto: f32,
-    skladka_emerytalna: f32,
-    skladka_rentowa: f32,
-    skladka_chorobowa: f32,
-    skladka_zdrowotna: f32,
-    podatek: f32,
-    wynagrodzenie_netto: f32
-}
-
 pub fn brutto_na_netto(
     brutto_zus_zdr_pod: f32,        //przychód ozusowany, ozdrowotniony i opodatkowany
     brutto_zdr_pod: f32,            //przychód ozdrowotniony i opodatkowany
@@ -48,43 +37,43 @@ pub fn brutto_na_netto(
     };
 
     let brutto_cal =    //cały przychód
-        brutto_zus_zdr_pod
+        zaokr(brutto_zus_zdr_pod
         + brutto_zdr_pod
         + brutto_pod
         + brutto_netto
         + brutto_nie_zus_zdr_pod
         + brutto_nie_zdr_pod
         + brutto_nie_pod
-        + brutto_nie_netto;
+        + brutto_nie_netto);
 
     let brutto_wyp =    //cały wypłacany przychód
-        brutto_zus_zdr_pod
+        zaokr(brutto_zus_zdr_pod
         + brutto_zdr_pod
         + brutto_pod
-        + brutto_netto;
+        + brutto_netto);
 
     let pd_zus =        //przychód stanowiący podstawę składek ZUS
-        brutto_zus_zdr_pod
-        + brutto_nie_zus_zdr_pod;
+        zaokr(brutto_zus_zdr_pod
+        + brutto_nie_zus_zdr_pod);
 
     let pd_zdr =        //przychód stanowiący podstawę składki zdrowotnej
-        brutto_zus_zdr_pod
+        zaokr(brutto_zus_zdr_pod
         + brutto_nie_zus_zdr_pod
-        + brutto_nie_zdr_pod;
+        + brutto_nie_zdr_pod);
 
     let pd_pod =        //przychód stanowiący podstawę podatku
-        brutto_zus_zdr_pod
+        zaokr(brutto_zus_zdr_pod
         + brutto_zdr_pod
         + brutto_pod
         + brutto_nie_zus_zdr_pod
         + brutto_nie_zdr_pod
-        + brutto_nie_pod;
+        + brutto_nie_pod);
 
     let zus_emerytalna = zaokr(pd_zus * 0.0976);
     let zus_rentowa = zaokr(pd_zus * 0.015);
     let zus_chorobowa = zaokr(pd_zus * 0.0245);
 
-    let zus = zus_emerytalna + zus_rentowa + zus_chorobowa; //suma składek ZUS
+    let zus = zaokr(zus_emerytalna + zus_rentowa + zus_chorobowa); //suma składek ZUS
 
     let zdrowotna = zaokr((pd_zdr - zus) * 0.09);
 
@@ -94,16 +83,50 @@ pub fn brutto_na_netto(
         ((pd_pod - zus - kup).round() * pod_proc - ulga).round()
     };
 
-    let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
+    let netto = zaokr(brutto_wyp - zus - zdrowotna - podatek - potr_dod);
 
     Wynik {
-        calkowite_wynagrodzenie_brutto: brutto_cal,
-        wyplacane_wynagrodzenie_brutto: brutto_wyp,
-        skladka_emerytalna: zus_emerytalna,
-        skladka_rentowa: zus_rentowa,
-        skladka_chorobowa: zus_chorobowa,
-        skladka_zdrowotna: zdrowotna,
-        podatek: podatek,
-        wynagrodzenie_netto: netto
+        brutto_cal,
+        brutto_wyp,
+        zus_emerytalna,
+        zus_rentowa,
+        zus_chorobowa,
+        zdrowotna,
+        podatek,
+        netto
+    }
+}
+
+pub struct Wynik {
+    brutto_cal: f32,
+    brutto_wyp: f32,
+    zus_emerytalna: f32,
+    zus_rentowa: f32,
+    zus_chorobowa: f32,
+    zdrowotna: f32,
+    podatek: f32,
+    netto: f32
+}
+
+impl Wynik {
+    pub fn show(&self) {
+        println!(
+            "Całkowite wynagrodzenie brutto: {:.2} zł
+            Wypłacane wynagrodzenie brutto: {:.2} zł\n
+            Składka na ubezpieczenie emerytalne: {:.2} zł
+            Składka na ubezpieczenie rentowe: {:.2} zł
+            Składka na ubezpieczenie chorobowe: {:.2} zł\n
+            Składka na ubezpieczenie zdrowotne: {:.2} zł\n
+            Zaliczka na podatek dochodowy: {:.2} zł\n
+            Wypłacane wynagrodzenie netto: {:.2} zł",
+            self.brutto_cal,
+            self.brutto_wyp,
+            self.zus_emerytalna,
+            self.zus_rentowa,
+            self.zus_chorobowa,
+            self.zdrowotna,
+            self.podatek,
+            self.netto
+        );
     }
 }
