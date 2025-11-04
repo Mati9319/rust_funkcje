@@ -2,6 +2,17 @@ fn zaokr(x: f32) -> f32 {
     (x * 100.0).round() / 100.0
 }
 
+struct Wynik {
+    calkowite_wynagrodzenie_brutto: f32,
+    wyplacane_wynagrodzenie_brutto: f32,
+    skladka_emerytalna: f32,
+    skladka_rentowa: f32,
+    skladka_chorobowa: f32,
+    skladka_zdrowotna: f32,
+    podatek: f32,
+    wynagrodzenie_netto: f32
+}
+
 pub fn brutto_na_netto(
     brutto_zus_zdr_pod: f32,        //przychód ozusowany, ozdrowotniony i opodatkowany
     brutto_zdr_pod: f32,            //przychód ozdrowotniony i opodatkowany
@@ -17,7 +28,7 @@ pub fn brutto_na_netto(
     jaki_pod_proc: char,            //'1' <- 12%, '2' <- 32%
     jaka_ulga: char                 //'0' <- brak ulgi, '1' <- 300, '2' <- 150, '3' <- 100
 
-) -> [f32; 8] {
+) -> Wynik {
     let kup = match jakie_kup {
         '1' => 250.0,
         '2' => 300.0,
@@ -85,12 +96,14 @@ pub fn brutto_na_netto(
 
     let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
 
-    [brutto_cal,
-    brutto_wyp,
-    zus_emerytalna,
-    zus_rentowa,
-    zus_chorobowa,
-    zdrowotna,
-    podatek,
-    netto]
+    Wynik {
+        brutto_cal,
+        brutto_wyp,
+        zus_emerytalna,
+        zus_rentowa,
+        zus_chorobowa,
+        zdrowotna,
+        podatek,
+        netto
+    }
 }
