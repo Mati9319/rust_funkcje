@@ -16,7 +16,7 @@ pub fn brutto_na_netto(
     jakie_kup: char, //'0' <- brak kosztów, '1' <- 250, '2' <- 300
     jaki_pod_proc: char, //'1' <- 12%, '2' <- 32%
     jaka_ulga: char //'0' <- brak ulgi, '1' <- 300, '2' <- 150, '3' <- 100
-    
+
 ) -> [f32; 8] {
     let kup = match jakie_kup {
         '1' => 250.0,
