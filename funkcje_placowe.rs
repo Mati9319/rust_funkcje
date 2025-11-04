@@ -69,7 +69,7 @@ pub fn brutto_na_netto(
     let zus_rentowa = zaokr(pod_zus * 0.015);
     let zus_chorobowa = zaokr(pod_zus * 0.0245);
 
-    let zus = zus_emerytalna + zus_rentowa + zus_chorobowa;
+    let zus = zus_emerytalna + zus_rentowa + zus_chorobowa; //suma składek ZUS
 
     let zdrowotna = zaokr((pod_zdr - zus) * 0.09);
 
