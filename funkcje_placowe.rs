@@ -36,34 +36,38 @@ pub fn brutto_na_netto(
         _ => 0.0
     };
 
-    let brutto_cal = brutto_zus_zdr_pod //cały przychód
-                    + brutto_zdr_pod
-                    + brutto_pod
-                    + brutto_netto
-                    + brutto_nie_zus_zdr_pod
-                    + brutto_nie_zdr_pod
-                    + brutto_nie_pod
-                    + brutto_nie_netto;
+    let brutto_cal =    //cały przychód
+        brutto_zus_zdr_pod
+        + brutto_zdr_pod
+        + brutto_pod
+        + brutto_netto
+        + brutto_nie_zus_zdr_pod
+        + brutto_nie_zdr_pod
+        + brutto_nie_pod
+        + brutto_nie_netto;
 
-    let brutto_wyp = brutto_zus_zdr_pod //cały wypłacany przychód
-                    + brutto_zdr_pod
-                    + brutto_pod
-                    + brutto_netto;
+    let brutto_wyp =    //cały wypłacany przychód
+        brutto_zus_zdr_pod
+        + brutto_zdr_pod
+        + brutto_pod
+        + brutto_netto;
 
-    let pd_zus = brutto_zus_zdr_pod //przychód stanowiący podstawę składek ZUS
-                + brutto_nie_zus_zdr_pod;
+    let pd_zus =        //przychód stanowiący podstawę składek ZUS
+        brutto_zus_zdr_pod
+        + brutto_nie_zus_zdr_pod;
 
-    let pd_zdr = brutto_zus_zdr_pod //przychód stanowiący podstawę składki zdrowotnej
-                + brutto_zdr_pod
-                + brutto_nie_zus_zdr_pod
-                + brutto_nie_zdr_pod;
+    let pd_zdr =        //przychód stanowiący podstawę składki zdrowotnej
+        brutto_zus_zdr_pod
+        + brutto_nie_zus_zdr_pod
+        + brutto_nie_zdr_pod;
 
-    let pd_pod = brutto_zus_zdr_pod //przychód stanowiący podstawę podatku
-                + brutto_zdr_pod
-                + brutto_pod
-                + brutto_nie_zus_zdr_pod
-                + brutto_nie_zdr_pod
-                + brutto_nie_pod;
+    let pd_pod =        //przychód stanowiący podstawę podatku
+        brutto_zus_zdr_pod
+        + brutto_zdr_pod
+        + brutto_pod
+        + brutto_nie_zus_zdr_pod
+        + brutto_nie_zdr_pod
+        + brutto_nie_pod;
 
     let zus_emerytalna = zaokr(pd_zus * 0.0976);
     let zus_rentowa = zaokr(pd_zus * 0.015);
