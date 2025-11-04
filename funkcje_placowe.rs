@@ -81,8 +81,7 @@ pub fn brutto_na_netto(
 
     let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
 
-    let wynik = [
-                brutto_cal,
+    let wynik = [brutto_cal,
                 brutto_wyp,
                 zus_emerytalna,
                 zus_rentowa,
