@@ -11,20 +11,20 @@ pub fn brutto_na_netto(
     brutto_nie_zdr_pod: f32, //przychód niewypłacany (ozdrowotniony i opodatkowany)
     brutto_nie_pod: f32, //przychód niewypłacany (opodatkowany)
     brutto_nie_netto: f32, //przychód niewypłacany (bez potrąceń)
-    potr: f32, //dodatkowe potrącenia
+    potr_dod: f32, //dodatkowe potrącenia
     pod_zwol: bool, //czy zwolnienie z podatku
     jakie_kup: char, //'0' <- brak kosztów, '1' <- 250, '2' <- 300
-    jaki_pod: char, //'1' <- 12%, '2' <- 32%
+    jaki_pod_proc: char, //'1' <- 12%, '2' <- 32%
     jaka_ulga: char //'0' <- brak ulgi, '1' <- 300, '2' <- 150, '3' <- 100
     
-) -> [f32; 6] {
+) -> [f32; 8] {
     let kup = match jakie_kup {
         '1' => 250.0,
         '2' => 300.0,
         _ => 0.0
     };
 
-    let pod = match jaki_pod {
+    let pod_proc = match jaki_pod_proc {
         '2' => 0.32,
         _ => 0.12
     };
@@ -35,33 +35,39 @@ pub fn brutto_na_netto(
         '3' => 100.0,
         _ => 0.0
     };
+
+    let brutto_cal = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_pod + brutto_netto + brutto_nie_zus_zdr_pod + brutto_nie_zdr_pod + brutto_nie_pod + brutto_nie_netto; //cały przychód
     let brutto_wyp = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_pod + brutto_netto; //cały wypłacany przychód
 
-    let pod_zus = brutto_zus_zdr_pod + brutto_nie_zus_zdr_pod;
-    let pod_zdr = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_nie_zus_zdr_pod
+    let pod_zus = brutto_zus_zdr_pod + brutto_nie_zus_zdr_pod; //przychód stanowiący podstawę składek ZUS
+    let pod_zdr = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_nie_zus_zdr_pod + brutto_nie_zdr_pod; //przychód stanowiący podstawę składki zdrowotnej
+    let pod_pod = brutto_zus_zdr_pod + brutto_zdr_pod + brutto_pod + brutto_nie_zus_zdr_pod + brutto_nie_zdr_pod + brutto_nie_pod; //przychód stanowiący podstawę podatku
 
-    let zus_emerytalna = zaokr(brutto * 0.0976);
-    let zus_rentowa = zaokr(brutto * 0.015);
-    let zus_chorobowa = zaokr(brutto * 0.0245);
+    let zus_emerytalna = zaokr(pod_zus * 0.0976);
+    let zus_rentowa = zaokr(pod_zus * 0.015);
+    let zus_chorobowa = zaokr(pod_zus * 0.0245);
 
     let zus = zus_emerytalna + zus_rentowa + zus_chorobowa;
 
-    let zdrowotna = zaokr((brutto - zus) * 0.09);
+    let zdrowotna = zaokr((pod_zdr - zus) * 0.09);
 
     let podatek = if pod_zwol {
         0.0
     } else {
-        ((brutto - zus - kup).round() * pod - ulga).round()
+        ((pod_pod - zus - kup).round() * pod_proc - ulga).round()
     };
 
-    let netto = brutto - zus - zdrowotna - podatek;
+    let netto = brutto_wyp - zus - zdrowotna - podatek - potr_dod;
 
-    let wynik = [zus_emerytalna,
-                 zus_rentowa,
-                 zus_chorobowa,
-                 zdrowotna,
-                 podatek,
-                 netto];
+    let wynik = [
+                brutto_cal,
+                brutto_wyp,
+                zus_emerytalna,
+                zus_rentowa,
+                zus_chorobowa,
+                zdrowotna,
+                podatek,
+                netto];
 
     wynik
 }
