@@ -143,7 +143,7 @@ impl ListaPlac {
             netto
         }
     }
-    
+
     pub fn show(&self) {
         println!(
 "Całkowite wynagrodzenie brutto:      {:.2} zł
@@ -166,5 +166,22 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
         self.zdrowotna,
         self.podatek,
         self.netto);
+    }
+
+    pub fn przelicz(&mut self) {
+        self = Self:nalicz(
+            self.brutto_zus_zdr_pod,
+            self.brutto_zdr_pod,
+            self.brutto_pod,
+            self.brutto_netto,
+            self.brutto_nie_zus_zdr_pod,
+            self.brutto_nie_zdr_pod,
+            self.brutto_nie_pod,
+            self.brutto_nie_netto,
+            self.potr_dod,
+            self.pod_zwol,
+            self.jakie_kup,
+            self.jaki_pod_proc,
+            self.jaka_ulga)
     }
 }
