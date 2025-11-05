@@ -2,7 +2,7 @@ pub fn zaokr(x: f32) -> f32 {
     (x * 100.0).round() / 100.0
 }
 
-pub struct Lista_plac {
+pub struct ListaPlac {
     brutto_zus_zdr_pod: f32,
     brutto_zdr_pod: f32,
     brutto_pod: f32,
@@ -30,7 +30,7 @@ pub struct Lista_plac {
     netto: f32
 }
 
-impl Lista_plac {
+impl ListaPlac {
     pub fn nalicz(
         brutto_zus_zdr_pod: f32,        //przychód ozusowany, ozdrowotniony i opodatkowany
         brutto_zdr_pod: f32,            //przychód ozdrowotniony i opodatkowany
