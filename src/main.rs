@@ -1,4 +1,4 @@
-mod funkcje_placowe::*;
+mod funkcje_placowe{*};
 //use funkcje_placowe::*;
 
 fn main() {
