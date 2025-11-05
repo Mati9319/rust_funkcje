@@ -134,7 +134,12 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
         self.netto);
     }
 
-    pub fn wiecej(&mut self, mnoznik: f32) {
-        self.netto = self.netto * mnoznik;
+    pub fn show1(x: char) -> String {
+        loop {
+            match x {
+                '1' -> return ("{:.2} zł", self.brutto_cal)
+                '_' -> return "ses"
+            }
+        }
     }
 }
