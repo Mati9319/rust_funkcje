@@ -137,8 +137,8 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
     pub fn show1(x: char) -> String {
         loop {
             match x {
-                '1' -> return ("{:.2} zł", self.brutto_cal)
-                '_' -> return "ses"
+                '1' => return ("{:.2} zł", self.brutto_cal)
+                _ => return "ses"
             }
         }
     }
