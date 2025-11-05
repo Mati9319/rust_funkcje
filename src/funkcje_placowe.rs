@@ -134,7 +134,7 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
         self.netto);
     }
 
-    pub fn show(&self, other: &self.*) {
-        
+    pub fn wiecej(&mut self, mnoznik: f32) {
+        self.netto = self.netto * mnoznik;
     }
 }
