@@ -133,4 +133,8 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
         self.podatek,
         self.netto);
     }
+
+    pub fn show(&self, other: &self.*) {
+        
+    }
 }
