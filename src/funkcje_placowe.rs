@@ -169,7 +169,7 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
     }
 
     pub fn przelicz(&mut self) {
-        self = Self:nalicz(
+        self = Self::nalicz(
             self.brutto_zus_zdr_pod,
             self.brutto_zdr_pod,
             self.brutto_pod,
