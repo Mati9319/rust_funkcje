@@ -111,18 +111,18 @@ pub struct Wynik {
 impl Wynik {
     pub fn show(&self) {
         println!(
-"Całkowite wynagrodzenie brutto: {:.2} zł
-Wypłacane wynagrodzenie brutto: {:.2} zł
+"Całkowite wynagrodzenie brutto:      {:.2} zł
+Wypłacane wynagrodzenie brutto:      {:.2} zł
 
 Składka na ubezpieczenie emerytalne: {:.2} zł
-Składka na ubezpieczenie rentowe: {:.2} zł
-Składka na ubezpieczenie chorobowe: {:.2} zł
+Składka na ubezpieczenie rentowe:    {:.2} zł
+Składka na ubezpieczenie chorobowe:  {:.2} zł
 
-Składka na ubezpieczenie zdrowotne: {:.2} zł
+Składka na ubezpieczenie zdrowotne:  {:.2} zł
 
-Zaliczka na podatek dochodowy: {:.2} zł
+Zaliczka na podatek dochodowy:       {:.2} zł
 
-Wypłacane wynagrodzenie netto: {:.2} zł",
+Wypłacane wynagrodzenie netto:       {:.2} zł",
         self.brutto_cal,
         self.brutto_wyp,
         self.zus_emerytalna,
