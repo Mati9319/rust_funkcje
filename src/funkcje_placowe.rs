@@ -58,6 +58,7 @@ pub fn brutto_na_netto(
 
     let pd_zdr =        //przychód stanowiący podstawę składki zdrowotnej
         zaokr(brutto_zus_zdr_pod
+        + brutto_zdr_pod
         + brutto_nie_zus_zdr_pod
         + brutto_nie_zdr_pod);
 
