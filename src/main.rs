@@ -1,4 +1,5 @@
 mod lib;
+use lib::lista_plac::*;
 
 fn main() {
     let mut x = ListaPlac::nalicz(2644.58, 2105.76, 1691.4, 72.0, 100.0, 0.0, 0.0, 0.0, 550.0, false, '2', '1', '1');
