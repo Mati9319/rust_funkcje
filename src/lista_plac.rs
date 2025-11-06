@@ -1,3 +1,5 @@
+use crate::*;
+
 pub struct ListaPlac {
     pub brutto_zus_zdr_pod: f32,
     pub brutto_zdr_pod: f32,
