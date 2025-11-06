@@ -142,7 +142,7 @@ impl ListaPlac {
         }
     }
 
-    pub fn show(&self) {
+    pub fn wyswietl(&self) {
         println!(
 "Całkowite wynagrodzenie brutto:      {:.2} zł
 Wypłacane wynagrodzenie brutto:      {:.2} zł
