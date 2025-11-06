@@ -3,19 +3,19 @@ pub fn zaokr(x: f32) -> f32 {
 }
 
 pub struct ListaPlac {
-    brutto_zus_zdr_pod: f32,
-    brutto_zdr_pod: f32,
-    brutto_pod: f32,
-    brutto_netto: f32,              
-    brutto_nie_zus_zdr_pod: f32,    
-    brutto_nie_zdr_pod: f32,        
-    brutto_nie_pod: f32,           
-    brutto_nie_netto: f32,         
-    potr_dod: f32,                 
-    pod_zwol: bool,               
-    jakie_kup: char,                
-    jaki_pod_proc: char,            
-    jaka_ulga: char,            
+    pub brutto_zus_zdr_pod: f32,
+    pub brutto_zdr_pod: f32,
+    pub brutto_pod: f32,
+    pub brutto_netto: f32,              
+    pub brutto_nie_zus_zdr_pod: f32,    
+    pub brutto_nie_zdr_pod: f32,        
+    pub brutto_nie_pod: f32,           
+    pub brutto_nie_netto: f32,         
+    pub potr_dod: f32,                 
+    pub pod_zwol: bool,               
+    pub jakie_kup: char,                
+    pub jaki_pod_proc: char,            
+    pub jaka_ulga: char,            
     brutto_cal: f32,
     brutto_wyp: f32,
     pd_zus: f32,
@@ -169,7 +169,7 @@ Wypłacane wynagrodzenie netto:       {:.2} zł",
     }
 
     pub fn przelicz(&mut self) {
-        self = Self::nalicz(
+        *self = Self::nalicz(
             self.brutto_zus_zdr_pod,
             self.brutto_zdr_pod,
             self.brutto_pod,
