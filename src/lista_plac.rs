@@ -5,16 +5,16 @@ pub struct ListaPlac {
     pub brutto_zus_zdr_pod: f32,
     pub brutto_zdr_pod: f32,
     pub brutto_pod: f32,
-    pub brutto_netto: f32,              
-    pub brutto_nie_zus_zdr_pod: f32,    
-    pub brutto_nie_zdr_pod: f32,        
-    pub brutto_nie_pod: f32,           
-    pub brutto_nie_netto: f32,         
-    pub potr_dod: f32,                 
-    pub pod_zwol: bool,               
-    pub jakie_kup: char,                
-    pub jaki_pod_proc: char,            
-    pub jaka_ulga: char,            
+    pub brutto_netto: f32,
+    pub brutto_nie_zus_zdr_pod: f32,
+    pub brutto_nie_zdr_pod: f32,
+    pub brutto_nie_pod: f32,
+    pub brutto_nie_netto: f32,
+    pub potr_dod: f32,
+    pub pod_zwol: bool,
+    pub jakie_kup: char,
+    pub jaki_pod_proc: char,
+    pub jaka_ulga: char,
     brutto_cal: f32,
     brutto_wyp: f32,
     pd_zus: f32,
@@ -51,19 +51,19 @@ impl ListaPlac {
             '2' => 300.0,
             _ => 0.0
         };
-    
+
         let pod_proc = match jaki_pod_proc {
             '2' => 0.32,
             _ => 0.12
         };
-    
+
         let ulga = match jaka_ulga {
             '1' => 300.0,
             '2' => 150.0,
             '3' => 100.0,
             _ => 0.0
         };
-    
+
         let brutto_cal =    //cały przychód
             zaokr(brutto_zus_zdr_pod
             + brutto_zdr_pod
@@ -73,17 +73,17 @@ impl ListaPlac {
             + brutto_nie_zdr_pod
             + brutto_nie_pod
             + brutto_nie_netto);
-    
+
         let brutto_wyp =    //cały wypłacany przychód
             zaokr(brutto_zus_zdr_pod
             + brutto_zdr_pod
             + brutto_pod
             + brutto_netto);
-    
+
         let pd_zus =        //przychód stanowiący podstawę składek ZUS
             zaokr(brutto_zus_zdr_pod
             + brutto_nie_zus_zdr_pod);
-    
+
         let pd_zdr =        //przychód stanowiący podstawę składki zdrowotnej
             zaokr(brutto_zus_zdr_pod
             + brutto_zdr_pod
@@ -97,37 +97,37 @@ impl ListaPlac {
             + brutto_nie_zus_zdr_pod
             + brutto_nie_zdr_pod
             + brutto_nie_pod);
-    
+
         let zus_emerytalna = zaokr(pd_zus * 0.0976);
         let zus_rentowa = zaokr(pd_zus * 0.015);
         let zus_chorobowa = zaokr(pd_zus * 0.0245);
-    
+
         let zus = zaokr(zus_emerytalna + zus_rentowa + zus_chorobowa); //suma składek ZUS
-    
+
         let zdrowotna = zaokr((pd_zdr - zus) * 0.09);
-    
+
         let podatek = if pod_zwol {
             0.0
         } else {
             ((pd_pod - zus - kup).round() * pod_proc - ulga).round()
         };
-    
+
         let netto = zaokr(brutto_wyp - zus - zdrowotna - podatek - potr_dod);
-    
+
         Self {
             brutto_zus_zdr_pod,
             brutto_zdr_pod,
             brutto_pod,
-            brutto_netto,              
-            brutto_nie_zus_zdr_pod,    
-            brutto_nie_zdr_pod,        
-            brutto_nie_pod,           
-            brutto_nie_netto,         
-            potr_dod,                 
-            pod_zwol,               
-            jakie_kup,                
-            jaki_pod_proc,            
-            jaka_ulga,            
+            brutto_netto,
+            brutto_nie_zus_zdr_pod,
+            brutto_nie_zdr_pod,
+            brutto_nie_pod,
+            brutto_nie_netto,
+            potr_dod,
+            pod_zwol,
+            jakie_kup,
+            jaki_pod_proc,
+            jaka_ulga,
             brutto_cal,
             brutto_wyp,
             pd_zus,
