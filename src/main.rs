@@ -1,4 +1,4 @@
-mod lib;
+pub mod lib;
 use crate::lib::lista_plac::*;
 use crate::lib::przydatne_funkcje::*;
 
