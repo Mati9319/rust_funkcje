@@ -185,4 +185,9 @@ Wypłacane wynagrodzenie netto:       {:.2} zł
             self.jaki_pod_proc,
             self.jaka_ulga)
     }
+
+    pub fn przelicz_i_wyswietl(&mut self) {
+        self.przelicz();
+        self.wyswietl();
+    }
 }
